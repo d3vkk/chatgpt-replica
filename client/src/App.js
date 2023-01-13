@@ -7,7 +7,9 @@ function App() {
   const [input, setInput] = useState("");
   const [chatLog, setChatLog] = useState([]);
 
-
+  function clearChat() {
+    setChatLog([]);
+  }
   async function handleSubmit(e) {
     e.preventDefault();
     setChatLog((chatLog) => [...chatLog, { user: "me", message: `${input}` }]);
@@ -36,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <aside className="sidemenu">
-        <div className="sidemenu-button">
+        <div className="sidemenu-button" onClick={clearChat}>
           <span>+</span> New Chat
         </div>
       </aside>

@@ -12,9 +12,11 @@ function App() {
   }
   async function handleSubmit(e) {
     e.preventDefault();
-    setChatLog((chatLog) => [...chatLog, { user: "me", message: `${input}` }]);
-    setInput("");
-    console.log("handleSubmit ~ chatLog", chatLog);
+    let chatLogNew = [...chatLog, { user: "me", message: `${input}` }];
+    await setInput("");
+    await setChatLog(chatLogNew);
+
+    const messages = chatLogNew.map((message) => message.message).join("\n");
 
     const response = await fetch("http://localhost:3600/", {
       method: "POST",
@@ -22,15 +24,14 @@ function App() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        message: chatLog.map((message) => message.message).join(""),
+        message: messages,
       }),
     });
     const data = await response.json();
-    setChatLog((chatLog) => [
-      ...chatLog,
+    await setChatLog([
+      ...chatLogNew,
       { user: "gpt", message: `${data.message}` },
     ]);
-    console.log("handleSubmit2 ~ chatLog", chatLog);
 
     console.log(data.message);
   }

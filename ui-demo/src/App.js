@@ -75,6 +75,12 @@ function App() {
             <div className="newchat-button" onClick={clearChat}>
               <span>+</span> New Chat
             </div>
+            <a
+              className="github-button"
+              href=" https://github.com/d3vkk/chatgpt-replica"
+            >
+              GitHub
+            </a>
           </div>
         </div>
       </section>

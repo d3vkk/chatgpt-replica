@@ -58,24 +58,6 @@ function App() {
 
   return (
     <div className="App">
-      <aside className="sidemenu">
-        <div className="sidemenu-button" onClick={clearChat}>
-          <span>+</span> New Chat
-        </div>
-        <div className="models">
-          <select
-            onChange={(e) => {
-              setCurrentModel(e.target.value);
-            }}
-          >
-            {models.map((model) => (
-              <option key={model.id} value={model.id}>
-                {model.id}
-              </option>
-            ))}
-          </select>
-        </div>
-      </aside>
       <section className="chatbox">
         <div className="chat-log">
           {Array.isArray(chatLog)
@@ -93,6 +75,24 @@ function App() {
               onChange={(e) => setInput(e.target.value)}
             ></input>
           </form>
+          <div className="chat-input-cover">
+            <div className="models">
+              <select
+                onChange={(e) => {
+                  setCurrentModel(e.target.value);
+                }}
+              >
+                {models.map((model) => (
+                  <option key={model.id} value={model.id}>
+                    {model.id}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="newchat-button" onClick={clearChat}>
+              <span>+</span> New Chat
+            </div>
+          </div>
         </div>
       </section>
     </div>

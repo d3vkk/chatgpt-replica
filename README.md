@@ -1,8 +1,10 @@
-# ChatGPT API Tutorial
+# ChatGPT Replica
 
 ![ChatGPT API Logo](https://github.com/d3vkk/chatgpt-replica/blob/master/client/public/chatgpt-logo.jpg)
 
 ChatGPT Replica
+
+[UI Demo](https://chatgptreplica.netlify.app)
 
 ## Set Up
 

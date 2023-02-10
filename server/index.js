@@ -12,25 +12,19 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-
-const sampleResponse = require("./sampleResponse")
 app.post("/", async (req, res) => {
-  // const { message, currentModel } = req.body;
-  // const response = await openai.createCompletion({
-  //   // model: "text-davinci-003",
-  //   model: `${currentModel}`,
-  //   prompt: `${message}`,
-  //   max_tokens: 100,
-  //   temperature: 0.5,
-  // });
-
-  // res.json({
-  //   message: response.data.choices[0].text,
-  // });
+  const { message, currentModel } = req.body;
+  const response = await openai.createCompletion({
+    // model: "text-davinci-003",
+    model: `${currentModel}`,
+    prompt: `${message}`,
+    max_tokens: 100,
+    temperature: 0.5,
+  });
 
   res.json({
-    message: sampleResponse.sampleResponse().choices[0].text,
-  })
+    message: response.data.choices[0].text,
+  });
 });
 
 app.get("/models", async (req, res) => {

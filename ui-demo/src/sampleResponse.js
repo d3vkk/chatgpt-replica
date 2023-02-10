@@ -5,7 +5,7 @@ const getSampleResponse = {
   model: "text-davinci:003",
   choices: [
     {
-      text: "\n\nThis is a UI demo. In order for the app to be fully functional, you will need ChatGPT API Keys. \n\nHere is the guide: https://github.com/d3vkk/chatgpt-replica/blob/master/README.md",
+      text: "\n\nThis is a UI demo. In order for the app to be fully functional, you will need ChatGPT API Keys. \n\nHere is the guide: https://github.com/d3vkk/chatgpt-replica",
       index: 0,
       logprobs: null,
       finish_reason: "length",

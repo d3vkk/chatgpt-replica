@@ -1,56 +1,42 @@
 import React from "react";
 import "./normalize.css";
 import "./App.css";
+import { getModels } from "./models";
+import getSampleResponse from "./sampleResponse";
 import { useState, useEffect } from "react";
 
 function App() {
   useEffect(() => {
-    getEngines();
+    getEngines(getModels, getSampleResponse);
   }, []);
 
   const [input, setInput] = useState("");
   const [chatLog, setChatLog] = useState([]);
   const [models, setModels] = useState([]);
-  const [currentModel, setCurrentModel] = useState("ada");
+  const [sampleResponse, setSampleResponse] = useState({});
+  const [setCurrentModel] = useState("ada");
 
   function clearChat() {
     setChatLog([]);
   }
 
-  function getEngines() {
-    fetch("http://localhost:3600/models")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.models.data);
-        setModels(data.models.data);
-      });
+  function getEngines(getModels, getSampleResponse) {
+    setModels(getModels.models);
+    setSampleResponse(getSampleResponse);
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     let chatLogNew = [...chatLog, { user: "me", message: `${input}` }];
-    await setInput("");
-    await setChatLog(chatLogNew);
+    setInput("");
 
-    const messages = chatLogNew.map((message) => message.message).join("\n");
-
-    const response = await fetch("http://localhost:3600/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message: messages,
-        currentModel,
-      }),
-    });
-    const data = await response.json();
-    await setChatLog([
+    setChatLog([
       ...chatLogNew,
-      { user: "gpt", message: `${data.message}` },
+      {
+        user: "gpt",
+        message: `${sampleResponse.choices[0].text}`,
+      },
     ]);
-
-    console.log(data.message);
   }
 
   return (
